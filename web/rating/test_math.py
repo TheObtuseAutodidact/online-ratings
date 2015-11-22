@@ -1,7 +1,7 @@
-import unittest, collections, datetime
+import unittest, collections
 from datetime import date as date
 
-import rating_math as rm
+import rating.rating_math as rm
 
 Player = collections.namedtuple('Player', ['user_id'])
 Game = collections.namedtuple('Game', ['white', 'black', 'result', 'date_played'])

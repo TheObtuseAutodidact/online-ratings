@@ -45,13 +45,10 @@ def create_test_data():
     db.session.add(Player(id=6,name="BazPlayerIGS",server_id=2,user_id=5,token="secret_baz_IGS"))
     user_datastore.add_role_to_user(u, role_user)
 
-
-    gs = GoServer(id=1, name='KGS', url='http://gokgs.com', token='secret_kgs')
-    gs.admins.append(kgs_admin)
-    db.session.add(gs)
-    db.session.add(GoServer(id=2, name='IGS',
-                            url='http://pandanet.com',
-                            token='secret_igs'))
+    db.session.add(GoServer(id=1, name='KGS', url='http://gokgs.com', token='secret_kgs'))
+    db.session.add(GoServer(id=2, name='IGS', url='http://pandanet.com', token='secret_igs'))
+    kgs_server = GoServer.query.filter_by(name="KGS").first()
+    kgs_server.admins.append(kgs_admin)
 
     basedir = os.path.abspath(os.path.dirname(__file__))
     with open(os.path.join(basedir, 'tests/testsgf.sgf')) as sgf_file:
@@ -139,8 +136,7 @@ def create_extra_data():
     print("Strongest, %d (%f):\n%s"% (strongest, p_priors[strongest], strongest_games))
 
 
-if __name__ == '__main__': 
-    import argparse
+if __name__ == '__main__':
     random.seed(datetime.datetime.now().timestamp())
 
     app.config.from_object('config.DebugConfiguration')
