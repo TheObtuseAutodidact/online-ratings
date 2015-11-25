@@ -14,8 +14,9 @@ class BaseTestCase(TestCase):
 
     def setUp(self):
         db.create_all()
-        from create_db import create_test_data
-        create_test_data()
+        with app.app_context():
+            utils._security.password_hash = 'plaintext'
+            create_test_data()
 
     def tearDown(self):
         db.session.remove()
