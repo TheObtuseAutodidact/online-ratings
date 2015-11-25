@@ -1,5 +1,7 @@
 from flask.ext.testing import TestCase
+from flask.ext.security import utils
 from app import app, db
+from create_db import create_test_data
 
 # The test strategy is based on the tutorial found here:
 # https://realpython.com/blog/python/python-web-applications-with-flask-part-iii/
